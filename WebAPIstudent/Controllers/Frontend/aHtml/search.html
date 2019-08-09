@@ -1,0 +1,89 @@
+﻿
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Search</title>
+   
+    <script>
+        var stdlist = 0;
+        var xhrR = new XMLHttpRequest();
+        xhrR.addEventListener("readystatechange", ajaxReadHandler);
+
+        var xhrC = new XMLHttpRequest();
+        xhrC.addEventListener("readystatechange", ajaxCreateHandler);
+        window.onload = function () {
+            document.getElementById("addbtn").addEventListener("click", clickHandler);
+            xhrR.open("get", "http://localhost:49532/api/Student/Get", true);
+            xhrR.send();
+        };
+        function ajaxReadHandler(evt) {
+
+            if (evt.target.readyState === 4 && evt.target.status === 200) {
+
+                alert(xhrR.responseText);
+                var lst = JSON.parse(xhrR.responseText);
+                //display();
+
+            }
+
+        }
+        function ajaxCreateHandler(evt) {
+
+            if (evt.target.readyState === 4 && evt.target.status === 200) {
+
+                alert(xhrC.responseText);
+                var lst = JSON.parse(xhrC.responseText);
+                console.log(JSON.stringify(lst));
+                
+             };
+
+        }
+        function clickHandler() {
+            xhrR.open("get", "http://localhost:49532/api/Student/Get", true);
+            xhrR.send();
+
+        }
+        //function display()
+        //{
+            
+        //    document.getElementsByClassName("std").innerHTML = "";
+        //    for (var i = 0; i < stdlist.length; i++) {
+        //        if (stdlist[i] !== null) {
+        //            document.getElementById("std").innerHTML += `
+        //        <tr>
+        //            <td>${stdlist[i].usn}</td>
+        //            <td>${stdlist[i].name}</td>
+        //            <td>${stdlist[i].email}</td>
+        //            <td>${stdlist[i].address}</td>
+        //            <td>${stdlist[i].semester}</td>
+        //        </tr> 
+        //        `
+        //        }
+        //    }
+        //}
+
+
+    </script>
+
+</head>
+<body style="background: thistle;">
+    <div class="std">
+        <label>Select Semester:</label>
+        <select id="drop" name="dropdown">
+
+            <option value="1" selected>1 semester</option>
+            <option value="2">2 semester</option>
+            <option value="3">3 semester</option>
+            <option value="4">4 semester</option>
+            <option value="5">5 semester</option>
+            <option value="6">6 semester</option>
+            <option value="7">7 semester</option>
+            <option value="8">8 semester</option>
+
+        </select>
+
+        &nbsp;&nbsp;<input type="submit" name="submit" value="Submit" class="btn" id="addbtn" style="width:80px;">
+    </div>
+</body>
+</html>
